@@ -1,0 +1,44 @@
+##
+## varnishnginx.schema - Needed by Fusion Directory for managing Varnish/nginx plugin
+##
+## OID: 1.3.6.1.4.1.43214:
+##   .2    - LDAP Elements
+##   .2.1  - attributeTypes
+##   .2.2  - objectClasses
+##   .2.3  - Auxiliary objectClasses
+
+# Attributes
+attributetype ( 1.3.6.1.4.1.43214.2.1.101 NAME 'backendPath'
+  DESC 'Path within the specified backend'
+  EQUALITY caseIgnoreMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.43214.2.1.102 NAME 'backends'
+  DESC 'IP Address and Port of Backends'
+  EQUALITY caseIgnoreMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  )
+
+attributetype ( 1.3.6.1.4.1.43214.2.1.103 NAME 'vHostMonster'
+  DESC 'Whether Use Zope Virtual Host Monster URL'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE
+  )
+
+attributetype ( 1.3.6.1.4.1.43214.2.1.103 NAME 'ssl'
+  DESC 'Whether the Virtual Host use SSL'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE
+  )
+
+
+# Object Classes
+objectclass (1.3.6.1.4.1.43214.2.2.10 NAME 'varnishNginxVhost'
+  DESC 'Virtual Host Varnish/Nginx'
+  MUST ( cn $ backendPath $ backends $ vHostMonster )
+  MAY  ( description ) )
+
+
