@@ -34,11 +34,17 @@ attributetype ( 1.3.6.1.4.1.43214.2.1.104 NAME 'ssl'
   SINGLE-VALUE
   )
 
+attributetype ( 1.3.6.1.4.1.43214.2.1.105 NAME 'specialProbeURL'
+  DESC 'Special URL for backend probing'
+  EQUALITY caseIgnoreMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  SINGLE-VALUE )
+
 
 # Object Classes
 objectclass (1.3.6.1.4.1.43214.2.2.10 NAME 'varnishNginxVhost'
   DESC 'Virtual Host Varnish/Nginx'
-  MUST ( cn $ backendPath $ backends $ vHostMonster )
-  MAY  ( description ) )
+  MUST ( cn $ backendPath $ backends $ vHostMonster $ ssl )
+  MAY  ( description $ specialProbeURL ) )
 
 
